@@ -16,7 +16,7 @@ public class GoalFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_goal, null);
+        View v = inflater.inflate(R.layout.list_item_goal, null);
         return v;
     }
 }
