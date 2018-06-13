@@ -12,6 +12,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    Fragment goalsFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -24,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
                     return true;
                 case R.id.navigation_dashboard:
-                    Fragment fragment1 = new GoalFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment1).commit();
+                    goalsFragment = new GoalFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, goalsFragment).commit();
 
                     return true;
                 case R.id.navigation_notifications:
@@ -45,13 +46,13 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
-        if (fragment == null) {
-            fragment = new GoalFragment();
+        if (goalsFragment  == null) {
+            goalsFragment = new GoalFragment();
             fm.beginTransaction()
-                    .add(R.id.fragmentContainer, fragment)
+                    .add(R.id.fragmentContainer, goalsFragment)
                     .commit();
         }
+
     }
 
 }
