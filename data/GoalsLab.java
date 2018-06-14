@@ -1,4 +1,4 @@
-package criminalintent.android.bignerdranch.com.goalkeeper;
+package criminalintent.android.bignerdranch.com.goalkeeper.data;
 
 import android.content.Context;
 
