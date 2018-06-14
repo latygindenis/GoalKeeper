@@ -1,4 +1,4 @@
-package criminalintent.android.bignerdranch.com.goalkeeper.data;
+package goalkeeper.android.bignerdranch.com.goalkeeper.data;
 
 import java.util.UUID;
 

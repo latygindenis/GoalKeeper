@@ -1,4 +1,4 @@
-package criminalintent.android.bignerdranch.com.goalkeeper.settings;
+package goalkeeper.android.bignerdranch.com.goalkeeper.settings;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import criminalintent.android.bignerdranch.com.goalkeeper.R;
+import goalkeeper.android.bignerdranch.com.goalkeeper.R;
 
 /**
  * Created by denis on 11.06.2018.

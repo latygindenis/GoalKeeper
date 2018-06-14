@@ -1,4 +1,4 @@
-package criminalintent.android.bignerdranch.com.goalkeeper.goalslist.recycler;
+package goalkeeper.android.bignerdranch.com.goalkeeper.goalslist.recycler;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import criminalintent.android.bignerdranch.com.goalkeeper.R;
-import criminalintent.android.bignerdranch.com.goalkeeper.data.Goal;
+import goalkeeper.android.bignerdranch.com.goalkeeper.R;
 
 /**
  * Created by denis on 14.06.2018.
