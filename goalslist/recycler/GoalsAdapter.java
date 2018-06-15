@@ -38,13 +38,13 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsHolder>{
     public void onBindViewHolder(final GoalsHolder holder, int position) { //Представление связывается с моделью
         final Goal goal = goals.get(position);
         holder.titleOfGoal.setText(goal.getTitle_goal());
-        holder.progressText.setText(goal.getSucsess_count() + "/66");
+        holder.progressText.setText(goal.getSuccess_count() + "/66");
         holder.progressBar.setMax(66);
-        holder.progressBar.setProgress(goal.getSucsess_count());
+        holder.progressBar.setProgress(goal.getSuccess_count());
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goal.setSucsess_count(goal.getSucsess_count() + 1);
+                goal.setSuccess_count(goal.getSuccess_count() + 1);
                 notifyDataSetChanged();
             }
         });

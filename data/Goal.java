@@ -9,12 +9,17 @@ import java.util.UUID;
 public class Goal {
     private UUID uuid;
     private String title_goal;
-    int sucsess_count;
+    int success_count;
+    int period;
 
     public Goal(String title_goal) {
         this.title_goal = title_goal;
-        sucsess_count = 0;
+        success_count = 0;
         uuid = UUID.randomUUID();
+        period = 1;
+    }
+    public Goal(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public UUID getUuid() {
@@ -33,11 +38,11 @@ public class Goal {
         this.title_goal = title_goal;
     }
 
-    public int getSucsess_count() {
-        return sucsess_count;
+    public int getSuccess_count() {
+        return success_count;
     }
 
-    public void setSucsess_count(int sucsess_count) {
-        this.sucsess_count = sucsess_count;
+    public void setSuccess_count(int success_count) {
+        this.success_count = success_count;
     }
 }
