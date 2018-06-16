@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import goalkeeper.android.bignerdranch.com.goalkeeper.R;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.Goal;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.GoalsLab;
+import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.addeditgoal.AddEditGoalActivity;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.GoalActivity;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goalslist.recycler.GoalsAdapter;
 
@@ -35,10 +36,6 @@ public class GoalFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        for(int i=0; i<100; i++){
-            Goal goal = new Goal(Integer.toString(i) + "Цель");
-            mGoalsLab.addGoal(goal);
-        }
     }
 
     @Nullable
@@ -52,7 +49,7 @@ public class GoalFragment extends Fragment {
         addGoalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), GoalActivity.class);
+                Intent intent = new Intent(getActivity(), AddEditGoalActivity.class);
                 startActivity(intent);
             }
         });

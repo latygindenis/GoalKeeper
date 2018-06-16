@@ -15,6 +15,14 @@ public class Goal {
     int success_count;
     int period;
 
+    public int getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(int period) {
+        this.period = period;
+    }
+
     public Goal(String title_goal) {
         this.title_goal = title_goal;
         success_count = 0;
