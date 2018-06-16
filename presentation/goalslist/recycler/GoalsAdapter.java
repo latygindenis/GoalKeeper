@@ -1,4 +1,4 @@
-package goalkeeper.android.bignerdranch.com.goalkeeper.goalslist.recycler;
+package goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goalslist.recycler;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import goalkeeper.android.bignerdranch.com.goalkeeper.R;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.Goal;
-import goalkeeper.android.bignerdranch.com.goalkeeper.goaldetail.GoalActivity;
+import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.GoalActivity;
 
 /**
  * Created by denis on 14.06.2018.
@@ -51,7 +51,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsHolder>{
         holder.goalCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,GoalActivity.class );
+                Intent intent = GoalActivity.newIntent(context, goal.getUuid());
                 context.startActivity(intent);
             }
         });

@@ -1,4 +1,4 @@
-package goalkeeper.android.bignerdranch.com.goalkeeper.goalslist;
+package goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goalslist;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,15 +11,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import java.util.ArrayList;
 
 import goalkeeper.android.bignerdranch.com.goalkeeper.R;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.Goal;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.GoalsLab;
-import goalkeeper.android.bignerdranch.com.goalkeeper.goaldetail.GoalActivity;
-import goalkeeper.android.bignerdranch.com.goalkeeper.goalslist.recycler.GoalsAdapter;
+import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.GoalActivity;
+import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goalslist.recycler.GoalsAdapter;
 
 /**
  * Created by denis on 11.06.2018.
@@ -31,6 +30,7 @@ public class GoalFragment extends Fragment {
     private GoalsAdapter mGoalsAdapter;
     private FloatingActionButton addGoalButton;
     private GoalsLab mGoalsLab = GoalsLab.get(getActivity());
+    private static final String ARG_GOAL_ID = "goal_id";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

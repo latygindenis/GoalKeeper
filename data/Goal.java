@@ -1,5 +1,7 @@
 package goalkeeper.android.bignerdranch.com.goalkeeper.data;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -9,6 +11,7 @@ import java.util.UUID;
 public class Goal {
     private UUID uuid;
     private String title_goal;
+    private ArrayList<Date> success_date;
     int success_count;
     int period;
 
@@ -17,6 +20,7 @@ public class Goal {
         success_count = 0;
         uuid = UUID.randomUUID();
         period = 1;
+        success_date = new ArrayList<>();
     }
     public Goal(UUID uuid) {
         this.uuid = uuid;

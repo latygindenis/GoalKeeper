@@ -28,6 +28,7 @@ public class GoalsLab{
     public void addGoal(Goal goal){
         mGoalArrayList.add(goal);
     }
+
     public Goal getGoal(UUID uuid){
         for (int i=0; i<mGoalArrayList.size(); i++) {
             if (mGoalArrayList.get(i).getUuid().equals(uuid)){

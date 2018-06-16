@@ -1,19 +1,17 @@
-package goalkeeper.android.bignerdranch.com.goalkeeper;
+package goalkeeper.android.bignerdranch.com.goalkeeper.presentation;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
-import goalkeeper.android.bignerdranch.com.goalkeeper.goalslist.GoalFragment;
-import goalkeeper.android.bignerdranch.com.goalkeeper.settings.SettingsFragment;
+import goalkeeper.android.bignerdranch.com.goalkeeper.R;
+import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goalslist.GoalFragment;
+import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.settings.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
 
 
 }

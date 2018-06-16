@@ -1,4 +1,4 @@
-package goalkeeper.android.bignerdranch.com.goalkeeper.goalslist.recycler;
+package goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goalslist.recycler;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;

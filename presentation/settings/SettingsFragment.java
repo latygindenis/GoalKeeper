@@ -1,4 +1,4 @@
-package goalkeeper.android.bignerdranch.com.goalkeeper.goaldetail;
+package goalkeeper.android.bignerdranch.com.goalkeeper.presentation.settings;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,15 +11,14 @@ import android.view.ViewGroup;
 import goalkeeper.android.bignerdranch.com.goalkeeper.R;
 
 /**
- * Created by denis on 14.06.2018.
+ * Created by denis on 11.06.2018.
  */
 
-public class GoalDetailFragment extends Fragment {
-
+public class SettingsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_add_goal, container, false);
+        View v = inflater.inflate(R.layout.fragment_settings, null);
         return v;
     }
 }
