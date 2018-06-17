@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import java.util.UUID;
 
 import goalkeeper.android.bignerdranch.com.goalkeeper.R;
+import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.MainActivity;
 
 /**
  * Created by denis on 14.06.2018.
@@ -37,5 +38,11 @@ public class GoalActivity extends AppCompatActivity{
             goalDetailFragment = GoalDetailFragment.newInstance(uuid);
             fm.beginTransaction().add(R.id.emptyFragment, goalDetailFragment).commit();
         }
+    }
+        @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent( getApplicationContext(), MainActivity.class );
+        startActivity(intent);
     }
 }

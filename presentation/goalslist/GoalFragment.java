@@ -30,7 +30,7 @@ public class GoalFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private GoalsAdapter mGoalsAdapter;
     private FloatingActionButton addGoalButton;
-    private GoalsLab mGoalsLab = GoalsLab.get(getActivity());
+    private GoalsLab mGoalsLab;
     private static final String ARG_GOAL_ID = "goal_id";
 
     @Override
@@ -42,6 +42,7 @@ public class GoalFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_list_goals, container, false);
+        mGoalsLab = GoalsLab.get(getActivity());
         mRecyclerView = v.findViewById(R.id.goals_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
