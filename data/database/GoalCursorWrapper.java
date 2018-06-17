@@ -3,6 +3,8 @@ package goalkeeper.android.bignerdranch.com.goalkeeper.data.database;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+
 import java.text.ParseException;
 import java.util.Date;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class GoalCursorWrapper extends CursorWrapper{
 
        ArrayConvertHelper arrayConvertHelper = new ArrayConvertHelper();
 
-       List<Date> dates = arrayConvertHelper.
+       List<CalendarDay> dates = arrayConvertHelper.
                fromStringToDateArray(getString(getColumnIndex(GoalsTable.Cols.SUCCESS_DATES)));
 
 

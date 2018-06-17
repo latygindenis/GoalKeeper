@@ -3,6 +3,7 @@ package goalkeeper.android.bignerdranch.com.goalkeeper.data;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -13,8 +14,8 @@ import java.util.UUID;
 
 public class Goal {
     private UUID uuid;
-    private String title_goal;
-    private List<Date> success_date;
+    private String title_goal="";
+    private List<CalendarDay> success_date;
     int success_count;
     int period;
 
@@ -31,19 +32,21 @@ public class Goal {
         success_count = 0;
         uuid = UUID.randomUUID();
         period = 1;
+        success_date =new ArrayList<>();
     }
 
-    public void setSuccess_date(List<Date> success_date) {
+    public void setSuccess_date(List<CalendarDay> success_date) {
         this.success_date = success_date;
     }
 
-    public List<Date> getSuccess_date() {
+    public List<CalendarDay> getSuccess_date() {
 
         return success_date;
     }
 
     public Goal(UUID uuid) {
         this.uuid = uuid;
+        success_date =new ArrayList<>();
     }
 
     public UUID getUuid() {
@@ -52,6 +55,7 @@ public class Goal {
 
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
+
     }
 
     public String getTitle_goal() {

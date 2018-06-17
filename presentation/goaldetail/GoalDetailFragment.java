@@ -58,20 +58,14 @@ public class GoalDetailFragment extends Fragment {
         calendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_MULTIPLE);
 
         for (int i=0; i<goal.getSuccess_date().size(); i++){
-            calendarView.setDateSelected(CalendarDay.from(goal.getSuccess_date().get(i)), true);
-            Log.i(CalendarDay.from(goal.getSuccess_date().get(i)).toString(), "");
+            calendarView.setDateSelected(goal.getSuccess_date().get(i), true);
         }
 
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                List<Date> dates = new ArrayList<>();
-                List<CalendarDay> calendarDays =  calendarView.getSelectedDates();
-
-                for (int i=0; i<calendarDays.size(); i++){
-                    dates.add(calendarDays.get(i).getDate());
-                }
-                goal.setSuccess_date( dates);
+                List<CalendarDay> calendarDays = calendarView.getSelectedDates();
+                goal.setSuccess_date(calendarDays);
                 GoalsLab.get(getActivity()).updateGoal(goal);
             }
         });
