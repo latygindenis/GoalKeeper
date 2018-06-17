@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -58,11 +59,13 @@ public class GoalsLab{
                 GoalsTable.Cols.UUID + " = ? ",
                 new String[]{uuidString});
     }
-    public static ContentValues getContentValues (Goal goal){
+    public static ContentValues getContentValues (Goal goal) {
         ContentValues values = new ContentValues();
+        ArrayConvertHelper arrayConvertHelper =new ArrayConvertHelper();
         values.put(GoalsTable.Cols.UUID, goal.getUuid().toString());
         values.put(GoalsTable.Cols.TITLE, goal.getTitle_goal());
         values.put(GoalsTable.Cols.SUCCESS_COUNT, goal.getSuccess_count());
+        values.put(GoalsTable.Cols.SUCCESS_DATES, arrayConvertHelper.fromArrayToString(goal.getSuccess_date()));
         return values;
     }
 
@@ -90,6 +93,14 @@ public class GoalsLab{
                 null,
                 null);
         return new GoalCursorWrapper(cursor);
+    }
+    public void updateGoal(Goal goal) {
+        String uuidString = goal.getUuid().toString();
+        ContentValues values = getContentValues(goal);
+
+        database.update(GoalsTable.NAME, values,
+                GoalsTable.Cols.UUID + " = ?",
+                new String[] {uuidString});
     }
 }
 

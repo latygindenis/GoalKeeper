@@ -24,7 +24,8 @@ public class GoalsBaseHelper extends SQLiteOpenHelper{
                         " _id integer primary key autoincrement, "+
                         GoalsTable.Cols.UUID + ", " +
                         GoalsTable.Cols.TITLE + ", " +
-                        GoalsTable.Cols.SUCCESS_COUNT + ")"
+                        GoalsTable.Cols.SUCCESS_COUNT + "," +
+                        GoalsTable.Cols.SUCCESS_DATES + ")"
         );
     }
 

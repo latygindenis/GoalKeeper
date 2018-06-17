@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import goalkeeper.android.bignerdranch.com.goalkeeper.R;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.Goal;
+import goalkeeper.android.bignerdranch.com.goalkeeper.data.GoalsLab;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.GoalActivity;
 
 /**
@@ -45,6 +46,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsHolder>{
             @Override
             public void onClick(View v) {
                 goal.setSuccess_count(goal.getSuccess_count() + 1);
+                GoalsLab.get(context).updateGoal(goal);
                 notifyDataSetChanged();
             }
         });
