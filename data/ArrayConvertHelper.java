@@ -38,7 +38,6 @@ public class ArrayConvertHelper {
                 }
             }
         }
-
         return str;
     }
 

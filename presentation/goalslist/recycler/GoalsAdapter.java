@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import goalkeeper.android.bignerdranch.com.goalkeeper.R;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.Goal;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.GoalsLab;
-import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.GoalActivity;
+import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.GoalDetailActivity;
 
 /**
  * Created by denis on 14.06.2018.
@@ -53,7 +53,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsHolder>{
         holder.goalCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = GoalActivity.newIntent(context, goal.getUuid());
+                Intent intent = GoalDetailActivity.newIntent(context, goal.getUuid());
                 context.startActivity(intent);
             }
         });

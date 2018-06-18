@@ -13,19 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import goalkeeper.android.bignerdranch.com.goalkeeper.R;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.Goal;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.GoalsLab;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.addeditgoal.AddEditGoalActivity;
-import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.GoalActivity;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goalslist.recycler.GoalsAdapter;
 
 /**
  * Created by denis on 11.06.2018.
  */
 
-public class GoalFragment extends Fragment {
+public class GoalListFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private GoalsAdapter mGoalsAdapter;
@@ -50,7 +50,7 @@ public class GoalFragment extends Fragment {
         addGoalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AddEditGoalActivity.class);
+                Intent intent = AddEditGoalActivity.newIntent(getActivity(), UUID.randomUUID());
                 startActivity(intent);
             }
         });

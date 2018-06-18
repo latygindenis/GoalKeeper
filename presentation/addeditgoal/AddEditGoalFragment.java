@@ -18,7 +18,7 @@ import java.util.UUID;
 import goalkeeper.android.bignerdranch.com.goalkeeper.R;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.Goal;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.GoalsLab;
-import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.GoalActivity;
+import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.GoalDetailActivity;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.GoalDetailFragment;
 
 /**
@@ -26,16 +26,43 @@ import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.Go
  */
 
 public class AddEditGoalFragment extends Fragment {
+    private static final String ARG_GOAL_ID = "goal_id";
+
+
     EditText goalTitle;
     Button addGoal;
     EditText periodEditText;
     Goal goal;
+    UUID uuid;
+    boolean newGoal = false;
+
+    public static AddEditGoalFragment newInstance(UUID uuid) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_GOAL_ID, uuid);
+        AddEditGoalFragment fragment = new AddEditGoalFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        uuid = (UUID)getArguments().getSerializable(ARG_GOAL_ID);
+        if(GoalsLab.get(getContext()).getGoal(uuid)!=null){
+            goal = GoalsLab.get(getContext()).getGoal(uuid);
+        }
+        else {
+            newGoal = true;
+        }
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_add_goal, container, false);
-        goal = new Goal(UUID.randomUUID());
+
+
         goalTitle = v.findViewById(R.id.goal_title);
         goalTitle.addTextChangedListener(new TextWatcher() {
             @Override
@@ -75,12 +102,26 @@ public class AddEditGoalFragment extends Fragment {
         addGoal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GoalsLab.get(getActivity()).addGoal(goal);
-                Intent intent = GoalActivity.newIntent(getActivity(), goal.getUuid());
-                startActivity(intent);
+                if (newGoal){
+                    GoalsLab.get(getActivity()).addGoal(goal);
+                    Intent intent = GoalDetailActivity.newIntent(getActivity(), goal.getUuid());
+                    startActivity(intent);
+                } else {
+                    GoalsLab.get(getActivity()).updateGoal(goal);
+                    Intent intent = GoalDetailActivity.newIntent(getActivity(), goal.getUuid());
+                    startActivity(intent);
+                }
+
             }
         });
+        if (newGoal){
+            goal = new Goal(UUID.randomUUID());
+        } else {
+            goalTitle.setText(goal.getTitle_goal());
+            addGoal.setText("Сохранить изменения");
+        }
 
         return v;
     }
+
 }

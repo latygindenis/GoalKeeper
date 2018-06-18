@@ -16,13 +16,13 @@ import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.MainActivity;
  * Created by denis on 14.06.2018.
  */
 
-public class GoalActivity extends AppCompatActivity{
-    private static final String EXTRA_CRIME_ID = "crime_id";
+public class GoalDetailActivity extends AppCompatActivity{
+    private static final String EXTRA_GOAL_ID = "goal_id";
     GoalDetailFragment goalDetailFragment;
 
     public static Intent newIntent(Context packageContext, UUID uuid){
-        Intent intent = new Intent(packageContext, GoalActivity.class);
-        intent.putExtra(EXTRA_CRIME_ID, uuid);
+        Intent intent = new Intent(packageContext, GoalDetailActivity.class);
+        intent.putExtra(EXTRA_GOAL_ID, uuid);
         return intent;
     }
 
@@ -32,7 +32,7 @@ public class GoalActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.empty_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        UUID uuid = (UUID)getIntent().getSerializableExtra(EXTRA_CRIME_ID);
+        UUID uuid = (UUID)getIntent().getSerializableExtra(EXTRA_GOAL_ID);
         FragmentManager fm = getSupportFragmentManager();
         if (goalDetailFragment == null){
             goalDetailFragment = GoalDetailFragment.newInstance(uuid);

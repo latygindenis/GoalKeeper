@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import goalkeeper.android.bignerdranch.com.goalkeeper.R;
-import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goalslist.GoalFragment;
+import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goalslist.GoalListFragment;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.settings.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
                     return true;
                 case R.id.navigation_dashboard:
-                    goalsFragment = new GoalFragment();
+                    goalsFragment = new GoalListFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, goalsFragment).commit();
 
                     return true;
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentManager fm = getSupportFragmentManager();
         if (goalsFragment  == null) {
-            goalsFragment = new GoalFragment();
+            goalsFragment = new GoalListFragment();
             fm.beginTransaction()
                     .add(R.id.fragmentContainer, goalsFragment)
                     .commit();
