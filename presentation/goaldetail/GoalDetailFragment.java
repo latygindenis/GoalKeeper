@@ -94,7 +94,6 @@ public class GoalDetailFragment extends Fragment {
             case  R.id.menu_item_edit_goal:
                 Intent intent = AddEditGoalActivity.newIntent(getActivity(), goal.getUuid());
                 startActivity(intent);
-                Toast.makeText(getActivity(), "Edit", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

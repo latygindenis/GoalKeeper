@@ -18,6 +18,7 @@ import java.util.UUID;
 import goalkeeper.android.bignerdranch.com.goalkeeper.R;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.Goal;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.GoalsLab;
+import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.MainActivity;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.GoalDetailActivity;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.GoalDetailFragment;
 
@@ -34,6 +35,7 @@ public class AddEditGoalFragment extends Fragment {
     EditText periodEditText;
     Goal goal;
     UUID uuid;
+    Button deleteGoal;
     boolean newGoal = false;
 
     public static AddEditGoalFragment newInstance(UUID uuid) {
@@ -114,12 +116,29 @@ public class AddEditGoalFragment extends Fragment {
 
             }
         });
+
+        deleteGoal = v.findViewById(R.id.deleteGoalButton);
+        deleteGoal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (newGoal){
+                    Intent intent = new Intent(getActivity(), MainActivity.class );
+                    startActivity(intent);
+                } else {
+                    GoalsLab.get(getActivity()).delGoal(goal);
+                    Intent intent = new Intent(getActivity(), MainActivity.class );
+                    startActivity(intent);
+                }
+            }
+        });
         if (newGoal){
             goal = new Goal(UUID.randomUUID());
         } else {
             goalTitle.setText(goal.getTitle_goal());
             addGoal.setText("Сохранить изменения");
         }
+
+
 
         return v;
     }
