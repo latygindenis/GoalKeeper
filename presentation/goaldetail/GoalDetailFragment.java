@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -84,16 +85,25 @@ public class GoalDetailFragment extends Fragment {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 if (date.getDate().getTime() <= new Date().getTime()){
-                    List<CalendarDay> calendarDays = calendarView.getSelectedDates();
-                    goal.getStatistics().setSuccess_dates(calendarDays);
-                    goal.getStatistics().updateStatistics();
-                    cur_attempt.setText(goal.getStatistics().getNumbers_of_attempt() +"");
-                    cur_streak.setText(goal.getStatistics().getCurrent_streak()+"");
-                    max_streak.setText(goal.getStatistics().getMax_streak()+"");
-                    total.setText(goal.getStatistics().getTotal_amount()+"");
-                    GoalsLab.get(getActivity()).updateGoal(goal);
+                    if (calendarView.getSelectedDates().size() != 0){
+                        List<CalendarDay> calendarDays = calendarView.getSelectedDates();
+                        goal.getStatistics().setSuccess_dates(calendarDays);
+                        goal.getStatistics().updateStatistics();
+                        cur_attempt.setText(goal.getStatistics().getNumbers_of_attempt() +"");
+                        cur_streak.setText(goal.getStatistics().getCurrent_streak()+"");
+                        max_streak.setText(goal.getStatistics().getMax_streak()+"");
+                        total.setText(goal.getStatistics().getTotal_amount()+"");
+                        GoalsLab.get(getActivity()).updateGoal(goal);
+                    } else {
+                        cur_attempt.setText("0");
+                        cur_streak.setText("0");
+                        max_streak.setText("0");
+                        total.setText("0");
+                    }
+
                 } else{
                     widget.setDateSelected(date, false);
+                    Snackbar.make(widget,"Дата еще не наступила!", Snackbar.LENGTH_SHORT).show();
                 }
 
             }
