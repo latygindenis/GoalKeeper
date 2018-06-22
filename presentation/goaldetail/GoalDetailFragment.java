@@ -41,6 +41,11 @@ public class GoalDetailFragment extends Fragment {
     MaterialCalendarView calendarView;
     Goal goal;
     TextView title;
+    TextView cur_attempt;
+    TextView cur_streak;
+    TextView max_streak;
+    TextView total;
+
 
     public static GoalDetailFragment newInstance(UUID uuid) {
         Bundle args = new Bundle();
@@ -63,19 +68,34 @@ public class GoalDetailFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_detail_goal, container, false);
         setHasOptionsMenu(true);
 
+        cur_attempt = v.findViewById(R.id.numberOfAttemptTextView);
+        cur_streak = v.findViewById(R.id.curStreakTextView);
+        max_streak = v.findViewById(R.id.maxStreakTextView);
+        total = v.findViewById(R.id.totalDays);
+
         calendarView = v.findViewById(R.id.calendarView);
         calendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_MULTIPLE);
 
-        for (int i=0; i<goal.getSuccess_date().size(); i++){
-            calendarView.setDateSelected(goal.getSuccess_date().get(i), true);
+        for (CalendarDay calendarDay:goal.getStatistics().getSuccess_dates()){
+            calendarView.setDateSelected(calendarDay, true);
         }
 
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                List<CalendarDay> calendarDays = calendarView.getSelectedDates();
-                goal.setSuccess_date(calendarDays);
-                GoalsLab.get(getActivity()).updateGoal(goal);
+                if (date.getDate().getTime() <= new Date().getTime()){
+                    List<CalendarDay> calendarDays = calendarView.getSelectedDates();
+                    goal.getStatistics().setSuccess_dates(calendarDays);
+                    goal.getStatistics().updateStatistics();
+                    cur_attempt.setText(goal.getStatistics().getNumbers_of_attempt() +"");
+                    cur_streak.setText(goal.getStatistics().getCurrent_streak()+"");
+                    max_streak.setText(goal.getStatistics().getMax_streak()+"");
+                    total.setText(goal.getStatistics().getTotal_amount()+"");
+                    GoalsLab.get(getActivity()).updateGoal(goal);
+                } else{
+                    widget.setDateSelected(date, false);
+                }
+
             }
         });
         title = v.findViewById(R.id.title_detail);

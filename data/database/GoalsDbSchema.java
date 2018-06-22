@@ -11,7 +11,6 @@ public class GoalsDbSchema {
         public static final class Cols{
             public static final String UUID = "uuid";
             public static final String TITLE = "title";
-            public static final String SUCCESS_COUNT = "success_count";
             public static final String SUCCESS_DATES = "success_dates";
         }
 

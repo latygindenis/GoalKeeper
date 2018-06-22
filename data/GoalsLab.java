@@ -64,8 +64,7 @@ public class GoalsLab{
         ArrayConvertHelper arrayConvertHelper =new ArrayConvertHelper();
         values.put(GoalsTable.Cols.UUID, goal.getUuid().toString());
         values.put(GoalsTable.Cols.TITLE, goal.getTitle_goal());
-        values.put(GoalsTable.Cols.SUCCESS_COUNT, goal.getSuccess_count());
-        values.put(GoalsTable.Cols.SUCCESS_DATES, arrayConvertHelper.fromArrayToString(goal.getSuccess_date()));
+        values.put(GoalsTable.Cols.SUCCESS_DATES, arrayConvertHelper.fromArrayToString(goal.getStatistics().getSuccess_dates()));
         return values;
     }
 

@@ -16,7 +16,6 @@ public class Goal {
     private UUID uuid;
     private String title_goal="";
     private Statistics statistics = new Statistics();
-    private List<CalendarDay> success_date;
 
     int success_count;
     int period;
@@ -34,21 +33,11 @@ public class Goal {
         success_count = 0;
         uuid = UUID.randomUUID();
         period = 1;
-        success_date =new ArrayList<>();
-    }
-
-    public void setSuccess_date(List<CalendarDay> success_date) {
-        this.success_date = success_date;
-    }
-
-    public List<CalendarDay> getSuccess_date() {
-
-        return success_date;
     }
 
     public Goal(UUID uuid) {
         this.uuid = uuid;
-        success_date =new ArrayList<>();
+
     }
 
     public UUID getUuid() {

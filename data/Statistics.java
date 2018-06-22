@@ -1,7 +1,12 @@
 package goalkeeper.android.bignerdranch.com.goalkeeper.data;
 
+import android.os.Build;
+
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +31,24 @@ public class Statistics {
     }
 
     private List<CalendarDay> success_dates;
+    private List<CalendarDay> sortable_list;
+
+    public int getTotal_amount() {
+        return total_amount;
+    }
+
+    public void setTotal_amount(int total_amount) {
+        this.total_amount = total_amount;
+    }
+
+    public Date getToday_date() {
+        return today_date;
+    }
+
+    public void setToday_date(Date today_date) {
+        this.today_date = today_date;
+    }
+
     private int total_amount;
     private int current_streak;
     private int max_streak;
@@ -62,23 +85,33 @@ public class Statistics {
     }
 
     public void updateStatistics(){
+
+        CalendarDateComparator calendarDateComparator =new CalendarDateComparator();
+        sortable_list = new ArrayList<CalendarDay> (success_dates);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            sortable_list.sort(calendarDateComparator);
+        }
         total_amount = success_dates.size();
+        numbers_of_attempt =0;
+        current_streak = 0;
+        max_streak = 0;
         check_streak();
     }
 
     private void check_streak(){
         today_date = new Date();
-        Date date_buf = success_dates.get(0).getDate();
+        Date date_buf = sortable_list.get(0).getDate();
         Calendar cal = Calendar.getInstance();
         cal.setTime(date_buf);
-        CalendarDay buffer = success_dates.get(0);
+        CalendarDay buffer = sortable_list.get(0);
         int buffer_streak=0;
-        for(CalendarDay calendarDay:success_dates){
+        for(CalendarDay calendarDay:sortable_list){
 
-            if (Math.abs(cal.getTime().getTime()-calendarDay.getDate().getTime()) < 43200  ){
+            if (cal.getTime().getDay() == calendarDay.getDate().getDay()  ){
                 buffer_streak++;
-            } else {
-                buffer_streak = 0;
+            } else if (buffer_streak !=0){
+                numbers_of_attempt ++;
+                buffer_streak = 1;
             }
             if (buffer_streak > max_streak){
                 max_streak = buffer_streak;
@@ -87,7 +120,7 @@ public class Statistics {
             cal.setTime(buffer.getDate());
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
-        if (Math.abs(today_date.getTime() - success_dates.get(success_dates.size()).getDate().getTime()) < 43200){
+        if (Math.abs(today_date.getTime() - sortable_list.get(sortable_list.size()-1).getDate().getTime()) < 43200){
             current_streak = buffer_streak;
             if (buffer_streak == 0){
                 current_streak = 1;

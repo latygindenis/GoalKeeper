@@ -26,7 +26,6 @@ public class GoalCursorWrapper extends CursorWrapper{
     public Goal getGoal() {
        String uuidString = getString(getColumnIndex(GoalsTable.Cols.UUID));
        String title = getString(getColumnIndex(GoalsTable.Cols.TITLE));
-       int success_count = getInt(getColumnIndex(GoalsTable.Cols.SUCCESS_COUNT));
 
        ArrayConvertHelper arrayConvertHelper = new ArrayConvertHelper();
 
@@ -36,8 +35,7 @@ public class GoalCursorWrapper extends CursorWrapper{
 
        Goal goal = new Goal(UUID.fromString(uuidString));
        goal.setTitle_goal(title);
-       goal.setSuccess_count(success_count);
-       goal.setSuccess_date(dates);
+       goal.getStatistics().setSuccess_dates(dates);
        return goal;
     }
 }
