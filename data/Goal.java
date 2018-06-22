@@ -15,7 +15,9 @@ import java.util.UUID;
 public class Goal {
     private UUID uuid;
     private String title_goal="";
+    private Statistics statistics = new Statistics();
     private List<CalendarDay> success_date;
+
     int success_count;
     int period;
 
@@ -73,4 +75,9 @@ public class Goal {
     public void setSuccess_count(int success_count) {
         this.success_count = success_count;
     }
+
+    public Statistics getStatistics() {
+        return statistics;
+    }
+
 }
