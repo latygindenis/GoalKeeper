@@ -17,7 +17,6 @@ public class Goal {
     private String title_goal="";
     private Statistics statistics = new Statistics();
 
-    int success_count;
     int period;
 
     public int getPeriod() {
@@ -30,7 +29,6 @@ public class Goal {
 
     public Goal(String title_goal) {
         this.title_goal = title_goal;
-        success_count = 0;
         uuid = UUID.randomUUID();
         period = 1;
     }
@@ -55,14 +53,6 @@ public class Goal {
 
     public void setTitle_goal(String title_goal) {
         this.title_goal = title_goal;
-    }
-
-    public int getSuccess_count() {
-        return success_count;
-    }
-
-    public void setSuccess_count(int success_count) {
-        this.success_count = success_count;
     }
 
     public Statistics getStatistics() {

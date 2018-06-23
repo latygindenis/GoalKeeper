@@ -36,6 +36,7 @@ public class GoalCursorWrapper extends CursorWrapper{
        Goal goal = new Goal(UUID.fromString(uuidString));
        goal.setTitle_goal(title);
        goal.getStatistics().setSuccess_dates(dates);
+       goal.getStatistics().updateStatistics();
        return goal;
     }
 }
