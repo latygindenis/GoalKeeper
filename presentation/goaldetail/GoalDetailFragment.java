@@ -74,6 +74,9 @@ public class GoalDetailFragment extends Fragment {
         max_streak = v.findViewById(R.id.maxStreakTextView);
         total = v.findViewById(R.id.totalDays);
 
+
+
+
         calendarView = v.findViewById(R.id.calendarView);
         calendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_MULTIPLE);
 
@@ -81,25 +84,14 @@ public class GoalDetailFragment extends Fragment {
             calendarView.setDateSelected(calendarDay, true);
         }
 
+        updateStatisticWidget();
+
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 if (date.getDate().getTime() <= new Date().getTime()){
-                    if (calendarView.getSelectedDates().size() != 0){
-                        List<CalendarDay> calendarDays = calendarView.getSelectedDates();
-                        goal.getStatistics().setSuccess_dates(calendarDays);
-                        goal.getStatistics().updateStatistics();
-                        cur_attempt.setText(goal.getStatistics().getNumbers_of_attempt() +"");
-                        cur_streak.setText(goal.getStatistics().getCurrent_streak()+"");
-                        max_streak.setText(goal.getStatistics().getMax_streak()+"");
-                        total.setText(goal.getStatistics().getTotal_amount()+"");
-                        GoalsLab.get(getActivity()).updateGoal(goal);
-                    } else {
-                        cur_attempt.setText("0");
-                        cur_streak.setText("0");
-                        max_streak.setText("0");
-                        total.setText("0");
-                    }
+                    updateStatisticWidget();
+                    GoalsLab.get(getActivity()).updateGoal(goal);//Обновление инфы в базе
 
                 } else{
                     widget.setDateSelected(date, false);
@@ -111,6 +103,23 @@ public class GoalDetailFragment extends Fragment {
         title = v.findViewById(R.id.title_detail);
         title.setText(goal.getTitle_goal());
         return v;
+    }
+
+    private void updateStatisticWidget() {
+        if (calendarView.getSelectedDates().size() != 0){
+            List<CalendarDay> calendarDays = calendarView.getSelectedDates();
+            goal.getStatistics().setSuccess_dates(calendarDays);
+            goal.getStatistics().updateStatistics();
+            cur_attempt.setText(goal.getStatistics().getNumbers_of_attempt() +"");
+            cur_streak.setText(goal.getStatistics().getCurrent_streak()+"");
+            max_streak.setText(goal.getStatistics().getMax_streak()+"");
+            total.setText(goal.getStatistics().getTotal_amount()+"");
+        } else {
+            cur_attempt.setText("0");
+            cur_streak.setText("0");
+            max_streak.setText("0");
+            total.setText("0");
+        }
     }
 
     @Override

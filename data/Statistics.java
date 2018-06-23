@@ -92,7 +92,7 @@ public class Statistics {
             sortable_list.sort(calendarDateComparator);
         }
         total_amount = success_dates.size();
-        numbers_of_attempt =0;
+        numbers_of_attempt = 1;
         current_streak = 0;
         max_streak = 0;
         check_streak();
@@ -100,6 +100,7 @@ public class Statistics {
 
     private void check_streak(){
         today_date = new Date();
+
         Date date_buf = sortable_list.get(0).getDate();
         Calendar cal = Calendar.getInstance();
         cal.setTime(date_buf);
@@ -120,7 +121,9 @@ public class Statistics {
             cal.setTime(buffer.getDate());
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
-        if (Math.abs(today_date.getTime() - sortable_list.get(sortable_list.size()-1).getDate().getTime()) < 43200){
+
+
+        if (today_date.getDay() - sortable_list.get(sortable_list.size()-1).getDate().getDay()  <=1 ){
             current_streak = buffer_streak;
             if (buffer_streak == 0){
                 current_streak = 1;
