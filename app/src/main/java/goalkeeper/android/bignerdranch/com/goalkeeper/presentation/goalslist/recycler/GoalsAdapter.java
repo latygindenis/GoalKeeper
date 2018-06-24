@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
@@ -24,7 +26,6 @@ import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.Go
 public class GoalsAdapter extends RecyclerView.Adapter<GoalsHolder>{
     private ArrayList<Goal> goals;
     private Context context;
-    private boolean checked = false;
 
     public GoalsAdapter (ArrayList<Goal> goals, Context cotext){
         this.goals = goals;
@@ -46,25 +47,33 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsHolder>{
         holder.progressText.setText(goal.getStatistics().getCurrent_streak() + "/66");
         holder.progressBar.setMax(66);
         holder.progressBar.setProgress(goal.getStatistics().getCurrent_streak());
+        int green, red;
+        green = holder.button.getResources().getColor(R.color.holo_green);
+        red = holder.button.getResources().getColor(R.color.holo_red);
         if(goal.getStatistics().isTodayChecked()){
-            holder.button.setText("Отменить");
+            holder.button.setBackgroundColor(green);
+        } else {
+            holder.button.setBackgroundColor(red);
         }
-
+        final Animation animAlpha = AnimationUtils.loadAnimation(context, R.anim.alpha);
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(animAlpha);
                 if (!goal.getStatistics().isTodayChecked()){
                     goal.getStatistics().getSuccess_dates().add(new CalendarDay(new Date()));
                     goal.getStatistics().updateStatistics();
                     GoalsLab.get(context).updateGoal(goal);
-                    holder.button.setText("Отменить");
+                    int green =holder.button.getResources().getColor(R.color.holo_green);
+                    holder.button.setBackgroundColor(green);
                     holder.progressBar.setProgress(goal.getStatistics().getCurrent_streak());
                     notifyDataSetChanged();
                 } else {
                     goal.getStatistics().getSuccess_dates().remove(goal.getStatistics().getSuccess_dates().size() - 1);
                     goal.getStatistics().updateStatistics();
                     GoalsLab.get(context).updateGoal(goal);
-                    holder.button.setText("Отметиться");
+                    int red = holder.button.getResources().getColor(R.color.holo_red);
+                    holder.button.setBackgroundColor(red);
                     holder.progressBar.setProgress(goal.getStatistics().getCurrent_streak());
                     notifyDataSetChanged();
                 }
