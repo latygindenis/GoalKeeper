@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import goalkeeper.android.bignerdranch.com.goalkeeper.R;
+import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.achievments.AchievmentFragment;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goalslist.GoalListFragment;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.settings.SettingsFragment;
 
@@ -34,20 +35,21 @@ public class MainActivity extends AppCompatActivity {
 
                     return true;
                 case R.id.navigation_notifications:
-
+                    Fragment achievementFragment = new AchievmentFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, achievementFragment).commit();
                     return true;
             }
             return false;
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setTitle("");
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        mTextMessage = findViewById(R.id.message);
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_dashboard);
