@@ -61,7 +61,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsHolder>{
             public void onClick(View v) {
                 v.startAnimation(animAlpha);
                 if (!goal.getStatistics().isTodayChecked()){
-                    goal.getStatistics().getSuccess_dates().add(new CalendarDay(new Date()));
+                    goal.getStatistics().getSuccess_dates().add(CalendarDay.from(new Date()));
                     goal.getStatistics().updateStatistics();
                     GoalsLab.get(context).updateGoal(goal);
                     int green =holder.button.getResources().getColor(R.color.holo_green);

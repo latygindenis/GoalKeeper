@@ -38,7 +38,7 @@ public class SettingsFragment extends Fragment {
                 builder.setTitle("Инструкция")
                         .setMessage("Данное приложение позволяет вам " +
                                 "закреплять ваши привычки. Поставьте цель, захо" +
-                                "дите каждый деньи вот увидете как ваша жизнь изменится!")
+                                "дите каждый день и вот увидете как ваша жизнь изменится!")
                         .setCancelable(true)
                         .setNegativeButton("Вас понял!", null);
                 AlertDialog alert = builder.create();

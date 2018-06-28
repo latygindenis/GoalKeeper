@@ -27,10 +27,17 @@ public class Statistics {
 
     public void setSuccess_dates(List<CalendarDay> success_dates) {
         this.success_dates = success_dates;
+        sortable_list = new ArrayList<>(success_dates);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            sortable_list.sort(calendarDateComparator);
+        }
+        this.success_dates = new ArrayList<>(sortable_list);
+
     }
 
     private List<CalendarDay> success_dates;
     private List<CalendarDay> sortable_list;
+    CalendarDateComparator calendarDateComparator =new CalendarDateComparator();
 
     public int getTotal_amount() {
         return total_amount;
@@ -60,10 +67,7 @@ public class Statistics {
     boolean TodayChecked = false;
     private Date today_date;
 
-    public Statistics(List<CalendarDay> success_dates){
-        this.success_dates = success_dates;
-        updateStatistics();
-    }
+
 
     public int getCurrent_streak() {
         return current_streak;
@@ -97,7 +101,7 @@ public class Statistics {
         current_streak = 0;
         max_streak = 0;
         if (success_dates.size()!= 0){
-            CalendarDateComparator calendarDateComparator =new CalendarDateComparator();
+
             sortable_list = new ArrayList<CalendarDay> (success_dates);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 sortable_list.sort(calendarDateComparator);
