@@ -59,6 +59,9 @@ public class GoalsLab{
                 GoalsTable.Cols.UUID + " = ? ",
                 new String[]{uuidString});
     }
+    public void deleteAllGoals(){
+        database.delete(GoalsTable.NAME, null, null);
+    }
     public static ContentValues getContentValues (Goal goal) {
         ContentValues values = new ContentValues();
         ArrayConvertHelper arrayConvertHelper =new ArrayConvertHelper();
