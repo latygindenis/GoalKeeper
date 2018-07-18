@@ -30,6 +30,7 @@ import goalkeeper.android.bignerdranch.com.goalkeeper.R;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.Goal;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.GoalsLab;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.database.GoalsDbSchema;
+import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.MainActivity;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.addeditgoal.AddEditGoalActivity;
 
 /**
@@ -68,7 +69,6 @@ public class GoalDetailFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_detail_goal, container, false);
         setHasOptionsMenu(true);
-
         cur_attempt = v.findViewById(R.id.numberOfAttemptTextView);
         cur_streak = v.findViewById(R.id.curStreakTextView);
         max_streak = v.findViewById(R.id.maxStreakTextView);
@@ -131,9 +131,14 @@ public class GoalDetailFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case  R.id.menu_item_edit_goal:
+            case  R.id.edit_menu:
                 Intent intent = AddEditGoalActivity.newIntent(getActivity(), goal.getUuid());
                 startActivity(intent);
+                return true;
+            case R.id.delete_menu:
+                GoalsLab.get(getContext()).delGoal(goal);
+                Intent intentToHome = new Intent(getActivity(), MainActivity.class);
+                startActivity(intentToHome);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

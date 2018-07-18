@@ -32,6 +32,7 @@ public class GoalDetailActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.empty_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Прогресс");
         UUID uuid = (UUID)getIntent().getSerializableExtra(EXTRA_GOAL_ID);
         FragmentManager fm = getSupportFragmentManager();
         if (goalDetailFragment == null){

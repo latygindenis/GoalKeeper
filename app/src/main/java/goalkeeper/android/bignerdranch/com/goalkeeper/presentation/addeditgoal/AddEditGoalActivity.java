@@ -37,6 +37,7 @@ public class AddEditGoalActivity extends AppCompatActivity {
         setContentView(R.layout.empty_activity);
         uuid = (UUID)getIntent().getSerializableExtra(EXTRA_GOAL_ID) ;
         FragmentManager fm = getSupportFragmentManager();
+        getSupportActionBar().setTitle("Редактирование цели");
         if (addEditGoalFragment == null){
             addEditGoalFragment = AddEditGoalFragment.newInstance(uuid);
             fm.beginTransaction().add(R.id.emptyFragment, addEditGoalFragment).commit();
