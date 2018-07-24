@@ -21,6 +21,7 @@ import java.util.UUID;
 import goalkeeper.android.bignerdranch.com.goalkeeper.R;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.Goal;
 import goalkeeper.android.bignerdranch.com.goalkeeper.data.GoalsLab;
+import goalkeeper.android.bignerdranch.com.goalkeeper.data.NotificationHelper;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.MainActivity;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.GoalDetailActivity;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.GoalDetailFragment;
@@ -135,6 +136,7 @@ public class AddEditGoalFragment extends Fragment {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
+                                NotificationHelper.scheduleRepeatingRTCNotification(getContext(), hourOfDay, minute, goal.getUuid());
                             }
                         }, mHour, mMinute, true);
                 timePickerDialog.show();

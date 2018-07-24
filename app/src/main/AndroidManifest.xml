@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="goalkeeper.android.bignerdranch.com.goalkeeper">
 
+
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -24,6 +26,7 @@
             android:parentActivityName=".presentation.MainActivity"/>
         <activity android:name=".presentation.addeditgoal.AddEditGoalActivity"
             android:parentActivityName=".presentation.MainActivity"/>
+        <receiver android:name=".data.AlarmReceiver"/>
     </application>
 
 </manifest>
