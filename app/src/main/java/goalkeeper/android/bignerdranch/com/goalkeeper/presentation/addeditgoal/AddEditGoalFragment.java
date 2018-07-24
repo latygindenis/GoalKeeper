@@ -1,5 +1,6 @@
 package goalkeeper.android.bignerdranch.com.goalkeeper.presentation.addeditgoal;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
+import java.util.Calendar;
 import java.util.UUID;
 
 import goalkeeper.android.bignerdranch.com.goalkeeper.R;
@@ -36,6 +39,7 @@ public class AddEditGoalFragment extends Fragment {
     Goal goal;
     UUID uuid;
     Button deleteGoal;
+    Button timePickerButton;
     boolean newGoal = false;
 
     public static AddEditGoalFragment newInstance(UUID uuid) {
@@ -82,23 +86,7 @@ public class AddEditGoalFragment extends Fragment {
 
             }
         });
-        periodEditText = v.findViewById(R.id.periodEditText);
-        periodEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
         addGoal = v.findViewById(R.id.addGoalButton);
         addGoal.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +117,27 @@ public class AddEditGoalFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), MainActivity.class );
                     startActivity(intent);
                 }
+            }
+        });
+
+        timePickerButton = v.findViewById(R.id.timePickerButton);
+        timePickerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // получаем текущее время
+                final Calendar cal = Calendar.getInstance();
+                int mHour = cal.get(Calendar.HOUR_OF_DAY);
+                int mMinute = cal.get(Calendar.MINUTE);
+
+                // инициализируем диалог выбора времени текущими значениями
+                TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                            }
+                        }, mHour, mMinute, true);
+                timePickerDialog.show();
             }
         });
         if (newGoal){

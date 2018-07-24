@@ -1,32 +1,29 @@
 <resources>
     <!-- стиль для заднего фона -->
-    <style name="MyActionBar" parent="Base.Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:background">@color/colorPrimary</item>
-        <item name="android:titleTextStyle">@style/MyTextAppearance</item>
-    </style>
-    <!-- стиль для текста -->
-    <style name="MyTextAppearance" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/lightPrimaryColor</item>
+    <style name="MyActionBar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">@color/white</item>
+        <!--<item name="android:popupBackground">@android:color/white</item>-->
+        <item name="popupMenuStyle">@style/myPopStyle</item>
+        <item name="android:popupMenuStyle">@style/myPopStyle</item>
     </style>
 
-    <style name="myPopStyle" parent="@android:style/Widget.Material.PopupMenu">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:popupBackground">@android:color/holo_red_light</item>
+
+    <style name="myPopStyle" parent="@style/Widget.AppCompat.Light.PopupMenu">
+
     </style>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:actionBarTheme">@style/MyActionBar</item>
-        <item name="android:textColorPrimary">@android:color/background_light</item>
-        <item name="android:navigationBarColor">@android:color/black</item>
-        <item name="android:colorForeground">@android:color/black</item>
-        <item name="popupS
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="actionBarTheme">@style/MyActionBar</item>
+
     </style>
 
 
-
+    <color name="white">#FFFFFF</color>
 </resources>
