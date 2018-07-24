@@ -41,7 +41,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         //Send local notification
         NotificationHelper.getNotificationManager(context).notify(notificationId, repeatedNotification);
-//        NotificationHelper.getNotificationManager(context).cancel();
     }
 
     public NotificationCompat.Builder buildLocalNotification(Context context, PendingIntent pendingIntent, String title) {

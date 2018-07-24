@@ -150,7 +150,7 @@ public class AddEditGoalFragment extends Fragment {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-                                NotificationHelper.scheduleRepeatingRTCNotification(getContext(), hourOfDay, minute, goal.getUuid());
+                                NotificationHelper.scheduleRepeatingRTCNotification(getContext(), hourOfDay, minute, goal.getUuid(), 1);
                                 goal.setHourNotif(hourOfDay);
                                 goal.setMinNotif(minute);
                                 timePickerButton.setText(goal.getHourNotif() + ":" + goal.getMinNotif());
@@ -171,9 +171,11 @@ public class AddEditGoalFragment extends Fragment {
                     timePickerButton.setEnabled(true);
                     timePickerButton.setVisibility(View.VISIBLE);
                     timePickerButton.setText(goal.getHourNotif() + ":" + goal.getMinNotif());
+                    NotificationHelper.scheduleRepeatingRTCNotification(getContext(), goal.getHourNotif(), goal.getMinNotif(), goal.getUuid(), 1);
                     goal.setEnableNotif(1);
                 } else {
                     timePickerButton.setVisibility(View.INVISIBLE);
+                    NotificationHelper.scheduleRepeatingRTCNotification(getContext(), goal.getHourNotif(), goal.getMinNotif(), goal.getUuid(), 0);
                     goal.setEnableNotif(0);
                 }
                 GoalsLab.get(getContext()).updateGoal(goal);
@@ -187,8 +189,6 @@ public class AddEditGoalFragment extends Fragment {
             goalTitle.setText(goal.getTitle_goal());
             addGoal.setText("Сохранить изменения");
         }
-
-
 
         return v;
     }

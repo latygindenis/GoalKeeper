@@ -13,11 +13,10 @@ import java.util.UUID;
 import static android.content.Context.ALARM_SERVICE;
 
 public class NotificationHelper {
-    public static int ALARM_TYPE_RTC = 100;
     private static AlarmManager alarmManagerRTC;
     private static PendingIntent alarmIntentRTC;
 
-    public static void scheduleRepeatingRTCNotification(Context context, int hour, int min, UUID uuid) {
+    public static void scheduleRepeatingRTCNotification(Context context, int hour, int min, UUID uuid, int enable) {
         //get calendar instance to be able to select what time notification should be scheduled
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -42,8 +41,17 @@ public class NotificationHelper {
         // Use this when you know what you're doing.
         //Use RTC when you don't need to wake up device, but want to deliver the notification whenever device is woke-up
         //We'll be using RTC.WAKEUP for demo purpose only
-        alarmManagerRTC.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-                calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntentRTC);
+        if (enable == 1){
+            alarmManagerRTC.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+                    calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntentRTC);
+        } else {
+            if (alarmManagerRTC != null) {
+                alarmManagerRTC.cancel(alarmIntentRTC);
+            }
+        }
+
+
+
     }
 
     public static void cancelAlarmRTC() {
@@ -53,6 +61,9 @@ public class NotificationHelper {
     }
     public static NotificationManager getNotificationManager(Context context) {
         return (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    }
+    public static void cancelAlarmById(Context context, int id){
+        getNotificationManager(context).cancel(id);
     }
 
 }
