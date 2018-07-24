@@ -5,9 +5,6 @@ import android.database.CursorWrapper;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
-import java.text.ParseException;
-import java.util.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,6 +23,9 @@ public class GoalCursorWrapper extends CursorWrapper{
     public Goal getGoal() {
        String uuidString = getString(getColumnIndex(GoalsTable.Cols.UUID));
        String title = getString(getColumnIndex(GoalsTable.Cols.TITLE));
+       int hourNotif = getInt(getColumnIndex(GoalsTable.Cols.HOUR_NOTIF));
+       int minNotif = getInt(getColumnIndex(GoalsTable.Cols.MIN_NOTIF));
+       int enableNotif = getInt(getColumnIndex(GoalsTable.Cols.ENABLE_NOTIF));
 
        ArrayConvertHelper arrayConvertHelper = new ArrayConvertHelper();
 
@@ -37,6 +37,10 @@ public class GoalCursorWrapper extends CursorWrapper{
        goal.setTitle_goal(title);
        goal.getStatistics().setSuccess_dates(dates);
        goal.getStatistics().updateStatistics();
+       goal.setHourNotif(hourNotif);
+       goal.setMinNotif(minNotif);
+       goal.setEnableNotif(enableNotif);
+
        return goal;
     }
 }

@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
@@ -41,6 +43,7 @@ public class AddEditGoalFragment extends Fragment {
     UUID uuid;
     Button deleteGoal;
     Button timePickerButton;
+    CheckBox enableNotif;
     boolean newGoal = false;
 
     public static AddEditGoalFragment newInstance(UUID uuid) {
@@ -62,12 +65,15 @@ public class AddEditGoalFragment extends Fragment {
         else {
             newGoal = true;
         }
+
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_add_goal, container, false);
+
+
 
 
         goalTitle = v.findViewById(R.id.goal_title);
@@ -122,6 +128,14 @@ public class AddEditGoalFragment extends Fragment {
         });
 
         timePickerButton = v.findViewById(R.id.timePickerButton);
+        if (goal == null || goal.getEnableNotif() == 0){
+            timePickerButton.setVisibility(View.INVISIBLE);
+        } else {
+            timePickerButton.setEnabled(true);
+            timePickerButton.setVisibility(View.VISIBLE);
+            timePickerButton.setText(goal.getHourNotif() + ":" + goal.getMinNotif());
+        }
+
         timePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,11 +151,36 @@ public class AddEditGoalFragment extends Fragment {
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
                                 NotificationHelper.scheduleRepeatingRTCNotification(getContext(), hourOfDay, minute, goal.getUuid());
+                                goal.setHourNotif(hourOfDay);
+                                goal.setMinNotif(minute);
+                                timePickerButton.setText(goal.getHourNotif() + ":" + goal.getMinNotif());
                             }
                         }, mHour, mMinute, true);
                 timePickerDialog.show();
             }
         });
+
+        enableNotif = v.findViewById(R.id.enableNotif);
+        if (goal != null && goal.getEnableNotif() == 1){
+            enableNotif.setChecked(true);
+        }
+        enableNotif.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    timePickerButton.setEnabled(true);
+                    timePickerButton.setVisibility(View.VISIBLE);
+                    timePickerButton.setText(goal.getHourNotif() + ":" + goal.getMinNotif());
+                    goal.setEnableNotif(1);
+                } else {
+                    timePickerButton.setVisibility(View.INVISIBLE);
+                    goal.setEnableNotif(0);
+                }
+                GoalsLab.get(getContext()).updateGoal(goal);
+            }
+        });
+
+
         if (newGoal){
             goal = new Goal(UUID.randomUUID());
         } else {

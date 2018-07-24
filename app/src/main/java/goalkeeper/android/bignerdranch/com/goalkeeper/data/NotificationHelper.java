@@ -32,7 +32,7 @@ public class NotificationHelper {
         Intent intent = new Intent(context, AlarmReceiver.class);
         intent.putExtra("UUID", uuid);
         //Setting alarm pending intent
-        alarmIntentRTC = PendingIntent.getBroadcast(context,uuid.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmIntentRTC = PendingIntent.getBroadcast(context, uuid.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //getting instance of AlarmManager service
         alarmManagerRTC = (AlarmManager)context.getSystemService(ALARM_SERVICE);

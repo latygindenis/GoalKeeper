@@ -19,6 +19,9 @@ import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goaldetail.Go
 public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+        int notificationId = ((UUID)intent.getSerializableExtra("UUID")).hashCode();
+        String title  =  GoalsLab.get(context).getGoal((UUID) intent.getSerializableExtra("UUID")).getTitle_goal();
+
         //Get notification manager to manage/send notifications
 
 
@@ -31,14 +34,14 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         //Pending intent to handle launch of Activity in intent above
         PendingIntent pendingIntent =
-                PendingIntent.getActivity(context, NotificationHelper.ALARM_TYPE_RTC, intentToRepeat, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.getActivity(context, notificationId, intentToRepeat, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //Build notification
-        Notification repeatedNotification = buildLocalNotification(context, pendingIntent,
-                GoalsLab.get(context).getGoal((UUID) intent.getSerializableExtra("UUID")).getTitle_goal()).build();
+        Notification repeatedNotification = buildLocalNotification(context, pendingIntent, title).build();
 
         //Send local notification
-        NotificationHelper.getNotificationManager(context).notify(NotificationHelper.ALARM_TYPE_RTC, repeatedNotification);
+        NotificationHelper.getNotificationManager(context).notify(notificationId, repeatedNotification);
+//        NotificationHelper.getNotificationManager(context).cancel();
     }
 
     public NotificationCompat.Builder buildLocalNotification(Context context, PendingIntent pendingIntent, String title) {

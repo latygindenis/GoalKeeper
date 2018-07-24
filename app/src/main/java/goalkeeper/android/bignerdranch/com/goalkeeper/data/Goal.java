@@ -1,11 +1,6 @@
 package goalkeeper.android.bignerdranch.com.goalkeeper.data;
 
-import com.prolificinteractive.materialcalendarview.CalendarDay;
 
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -15,6 +10,12 @@ import java.util.UUID;
 public class Goal {
     private UUID uuid;
     private String title_goal="";
+    private int hourNotif;
+
+
+
+    private int minNotif;
+    private int enableNotif = 0;
     private Statistics statistics = new Statistics();
 
     int period;
@@ -59,4 +60,35 @@ public class Goal {
         return statistics;
     }
 
+    public int getHourNotif() {
+        return hourNotif;
+    }
+
+    public void setHourNotif(int hourNotif) {
+        this.hourNotif = hourNotif;
+    }
+
+    public int getMinNotif() {
+        return minNotif;
+    }
+
+    public void setMinNotif(int minNotif) {
+        this.minNotif = minNotif;
+    }
+
+    public int isEneableNotif() {
+        return enableNotif;
+    }
+
+    public void setEnableNotif(int enableNotif) {
+        this.enableNotif = enableNotif;
+    }
+
+    public int getEnableNotif() {
+        return enableNotif;
+    }
+
+    public void setStatistics(Statistics statistics) {
+        this.statistics = statistics;
+    }
 }
