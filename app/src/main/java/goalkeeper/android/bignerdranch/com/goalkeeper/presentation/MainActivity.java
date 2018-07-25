@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import goalkeeper.android.bignerdranch.com.goalkeeper.R;
-import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.achievments.AchievmentFragment;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.goalslist.GoalListFragment;
 import goalkeeper.android.bignerdranch.com.goalkeeper.presentation.settings.SettingsFragment;
 
@@ -33,10 +32,6 @@ public class MainActivity extends AppCompatActivity {
                     goalsFragment = new GoalListFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, goalsFragment).commit();
 
-                    return true;
-                case R.id.navigation_notifications:
-                    Fragment achievementFragment = new AchievmentFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, achievementFragment).commit();
                     return true;
             }
             return false;

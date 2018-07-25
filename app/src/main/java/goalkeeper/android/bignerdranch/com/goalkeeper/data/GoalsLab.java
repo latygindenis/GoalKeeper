@@ -58,9 +58,11 @@ public class GoalsLab{
         database.delete(GoalsTable.NAME,
                 GoalsTable.Cols.UUID + " = ? ",
                 new String[]{uuidString});
+        NotificationHelper.scheduleRepeatingRTCNotification(context, goal.getHourNotif(), goal.getMinNotif(), goal.getUuid(), 0);
     }
     public void deleteAllGoals(){
         database.delete(GoalsTable.NAME, null, null);
+        NotificationHelper.cancelAlarmRTC();
     }
     public static ContentValues getContentValues (Goal goal) {
         ContentValues values = new ContentValues();

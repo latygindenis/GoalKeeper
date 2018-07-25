@@ -62,8 +62,6 @@ public class NotificationHelper {
     public static NotificationManager getNotificationManager(Context context) {
         return (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     }
-    public static void cancelAlarmById(Context context, int id){
-        getNotificationManager(context).cancel(id);
-    }
+
 
 }
